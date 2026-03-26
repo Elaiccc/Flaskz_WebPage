@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title i18n="SYS_ACTION_LOGS_TITLE"></title>
+    <link rel="stylesheet" href="../../../libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../libs/project/proj.css">
+
+    <script src="../../../libs/focus-ui/focus-ui.min.js"></script>
+    <script src="../../../libs/focus-ui/fu-pro.js"></script>
+    <script src="../../../libs/project/proj.js"></script>
+
+    <style>
+        #modalDiv pre {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            word-break: break-all;
+            white-space: break-spaces;
+        }
+
+        .z-grid button {
+            white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .toolbar label {
+            margin: 0;
+        }
+
+        .toolbar label:not(:first-child) {
+            margin-left: .3em;
+        }
+    </style>
+    <script src="./action_log.js"></script>
+</head>
+<body class="fu-pro">
+<div class="module">
+    <div class="toolbar controls">
+        <label class="col-form-label"><span i18n="SYS_ACTION_LOGS_MODULE"></span>:</label>
+        <select id="moduleSelect" ze-model="module"></select>
+
+        <label class="col-form-label"><span i18n="COMMON_ACTION"></span>:</label>
+        <select id="actionSelect" ze-model="action"> </select>
+
+        <label class="col-form-label"><span i18n="SYS_ACTION_LOGS_ACTION_RESULT"></span>:</label>
+        <select id="resultSelect" ze-model="result">
+            <option value="" i18n="COMMON_ALL"></option>
+            <option value="success" i18n="COMMON_SUCCESS"></option>
+            <option value="fail" i18n="COMMON_FAIL"></option>
+        </select>
+
+        <label class="col-form-label"><span i18n="SYS_ACTION_LOGS_AT"></span>:</label>
+        <select id="dateRangeSelect" ze-model="created_at">
+            <option value="" i18n="COMMON_ALL"></option>
+            <option value="previous_24_hours" i18n="SYS_ACTION_LOGS_PREVIOUS_24_HOURS"></option>
+            <option value="previous_7_days" i18n="SYS_ACTION_LOGS_PREVIOUS_7_DAYS"></option>
+            <option value="previous_30_days" i18n="SYS_ACTION_LOGS_PREVIOUS_30_DAYS"></option>
+            <!--<option disabled="true">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>
+            <option value="previous_month">上个月</option>
+            <option value="previous_2_months">上2个月</option>
+            <option value="previous_3_months">上3个月</option>-->
+        </select>
+    </div>
+    <div id="gridDiv" class="content"></div>
+
+    <div class="modal-form">
+        <div id="modalDiv" class="zw-modal drawer controls">
+            <div class="content">
+                <div class="header">
+                    <span id="titleDiv" ze-model="modal_title" class="title"></span>
+                    <span class="close" data-dismiss="modal">×</span>
+                </div>
+                <div class="body">
+                    <pre ze-model="detail"></pre>
+                </div>
+                <div class="footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" i18n="COMMON_ACTION_CLOSE"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

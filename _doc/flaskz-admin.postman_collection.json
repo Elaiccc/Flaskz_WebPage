@@ -1,0 +1,2921 @@
+{
+	"info": {
+		"_postman_id": "505a33d0-6db1-4736-92d6-1934cd7aada1",
+		"name": "flaskz-admin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sys_mgmt",
+			"item": [
+				{
+					"name": "_private",
+					"item": [
+						{
+							"name": "sys_log",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/_/sys_log/?date=2024-02-01",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"_",
+										"sys_log",
+										""
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "2024-02-01"
+										}
+									]
+								},
+								"description": "query sys log"
+							},
+							"response": []
+						},
+						{
+							"name": "url_map",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/_/url_map/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"_",
+										"url_map",
+										""
+									]
+								},
+								"description": "query sys log"
+							},
+							"response": []
+						},
+						{
+							"name": "clear_cache",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/_/clear_cache",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"_",
+										"clear_cache"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"flaskz_auth_token\",jsonData['data']['token']);",
+											"pm.collectionVariables.set(\"flaskz_auth_refresh_token\",jsonData['data']['refresh_token']);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\":\"admin\",\n\t\"password\":\"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/auth/token/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"auth",
+										"token",
+										""
+									]
+								},
+								"description": "get auth token"
+							},
+							"response": []
+						},
+						{
+							"name": "refresh_token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"flaskz_auth_token\",jsonData['data']['token']);",
+											"pm.collectionVariables.set(\"flaskz_auth_refresh_token\",jsonData['data']['refresh_token']);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"refresh_token\":\"{{flaskz_auth_refresh_token}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/auth/token/refresh/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"auth",
+										"token",
+										"refresh",
+										""
+									]
+								},
+								"description": "get auth token"
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\":\"admin\",\n\t\"password\":\"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/auth/login/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"auth",
+										"login",
+										""
+									]
+								},
+								"description": "use session&cookie to login"
+							},
+							"response": []
+						},
+						{
+							"name": "keep-alive",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/auth/keep-alive/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"auth",
+										"keep-alive",
+										""
+									]
+								},
+								"description": "logout session&cookie"
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/auth/logout/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"auth",
+										"logout",
+										""
+									]
+								},
+								"description": "logout session&cookie"
+							},
+							"response": []
+						},
+						{
+							"name": "basic_auth",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/auth/account/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"auth",
+										"account",
+										""
+									]
+								},
+								"description": "query account profile and menus"
+							},
+							"response": []
+						},
+						{
+							"name": "account",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/auth/account/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"auth",
+										"account",
+										""
+									]
+								},
+								"description": "query account profile and menus"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "add_user",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"u12\",\n    \"password\": \"123456\",\n    \"name\": \"ux\",\n    \"email\": \"ux@focus-ui.com\",\n    \"role_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/users/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete_user",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/users/2/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"users",
+										"2",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_user",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\":2,\n    \"username\": \"u12\",\n    \"password\": \"123456\",\n    \"name\": \"ux-x\",\n    \"email\": \"ux-x@focus-ui.com\",\n    \"status\": \"disable\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/users/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query_user",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/users/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"users",
+										""
+									]
+								},
+								"description": "query user list"
+							},
+							"response": []
+						},
+						{
+							"name": "query_multi",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{flaskz_auth_token}}"
+									},
+									{
+										"key": "X-Requested-With",
+										"type": "text",
+										"value": "{{flaskz_requested_with}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/users/multi/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"users",
+										"multi",
+										""
+									]
+								},
+								"description": "query user&role list"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "roles",
+					"item": [
+						{
+							"name": "add_role",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"test\",\n    \"description\": \"for test\",\n    \"modules\": [\n        {\n            \"module_id\": 10100, //模块\n            \"actions\": [ //操作权限\n                \"update\"\n            ]\n        },\n        {\n            \"module_id\": 10200,\n            \"actions\": [] //只读权限\n        },\n        {\n            \"module_id\": 10300,\n            \"actions\": [\n                \"update\"\n            ]\n        },\n        {\n            \"module_id\": 20100,\n            \"actions\": [\n                \"update\"\n            ]\n        },\n        {\n            \"module_id\": 20200,\n            \"actions\": [\n                \"update\"\n            ]\n        },\n        {\n            \"module_id\": 20300,\n            \"actions\": [\n                \"update\"\n            ]\n        },\n        {\n            \"module_id\": 20400,\n            \"actions\": [\n                \"update\"\n            ]\n        },\n        {\n            \"module_id\": 90100,\n            \"actions\": [\n                \"update\"\n            ]\n        },\n        {\n            \"module_id\": 90200,\n            \"actions\": [\n                \"update\"\n            ]\n        },\n        {\n            \"module_id\": 90300,\n            \"actions\": [\n                \"update\"\n            ]\n        },\n        {\n            \"module_id\": 90400,\n            \"actions\": [\n                \"update\"\n            ]\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/roles/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"roles",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete_role",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/roles/2/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"roles",
+										"2",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_role",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 2,\r\n    \"modules\": [\r\n        {\r\n            \"module_id\": 10100,\r\n            \"actions\": []\r\n        },\r\n        {\r\n            \"module_id\": 10200,\r\n            \"actions\": []\r\n        },\r\n        {\r\n            \"module_id\": 10300,\r\n            \"actions\": []\r\n        },\r\n        {\r\n            \"module_id\": 20100,\r\n            \"actions\": [\r\n                \"update\"\r\n            ]\r\n        },\r\n        {\r\n            \"module_id\": 20200,\r\n            \"actions\": [\r\n                \"update\"\r\n            ]\r\n        },\r\n        {\r\n            \"module_id\": 20300,\r\n            \"actions\": [\r\n                \"update\"\r\n            ]\r\n        },\r\n        {\r\n            \"module_id\": 20400,\r\n            \"actions\": [\r\n                \"update\"\r\n            ]\r\n        },\r\n        {\r\n            \"module_id\": 90100,\r\n            \"actions\": [\r\n                \"update\"\r\n            ]\r\n        },\r\n        {\r\n            \"module_id\": 90200,\r\n            \"actions\": [\r\n                \"update\"\r\n            ]\r\n        },\r\n        {\r\n            \"module_id\": 90300,\r\n            \"actions\": [\r\n                \"update\"\r\n            ]\r\n        },\r\n        {\r\n            \"module_id\": 90400,\r\n            \"actions\": [\r\n                \"update\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/roles/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"roles",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query_role",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/roles/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"roles",
+										""
+									]
+								},
+								"description": "query all menus and role list"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "sys-options",
+					"item": [
+						{
+							"name": "update_option",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\": \"test_key\",\r\n    \"value\": \"test_value_1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/sys-options/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"sys-options",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "bulk_update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"key\": \"test_key_1\",\n        \"value\": \"test_value_11\"\n    },\n    {\n        \"key\": \"test_key_2\",\n        \"value\": \"test_value_12\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/sys-options/bulk/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"sys-options",
+										"bulk",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query_option",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/sys-options/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"sys-options",
+										""
+									]
+								},
+								"description": "query all menus and role list"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "action-logs",
+					"item": [
+						{
+							"name": "query_modules",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{flaskz_auth_token}}"
+									},
+									{
+										"key": "X-Requested-With",
+										"type": "text",
+										"value": "{{flaskz_requested_with}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/modules/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"modules",
+										""
+									]
+								},
+								"description": "query log modules"
+							},
+							"response": []
+						},
+						{
+							"name": "query_ pss",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"search\": {\n  \"like\": \"\",\n  \"result\": \"success\"\n },\n \"page\": {\n \t \"limit\": 20,\n \t \"offset\": 0\n },\n \"sort\": {\n  \"field\": \"result\",\n  \"order\": \"asc\"\n }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/action-logs/pss/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"action-logs",
+										"pss",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "license",
+					"item": [
+						{
+							"name": "upload_license",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/Users/taozh/Desktop/license_new.dat"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/licenses/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"licenses",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query_license",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/sys-mgmt/licenses/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"sys-mgmt",
+										"licenses",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "example",
+			"item": [
+				{
+					"name": "simples",
+					"item": [
+						{
+							"name": "add",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"field_string\": \"Item-{{global_counter}}\",\n     \"field_integer\":{{global_counter}},\n     \"field_float\":1.0,\n     \"field_boolean\":true,\n     \"field_text\":\"for test\",\n    \"field_datetime\": \"2023-07-20T18:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-simples/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-simples",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-simples/1/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-simples",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1, //pk in body\n    \"field_integer\": 18\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-simples/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-simples",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_by_pk",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ //pk in url\n    \"field_integer\": 20\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-departments/1/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-departments",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query_all",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-simples/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-simples",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "download",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-simples/download/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-simples",
+										"download",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "departments",
+					"item": [
+						{
+							"name": "add",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Dept1\",\n    \"description\": \"Department1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-departments/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-departments",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-departments/1/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-departments",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1, //pk in body\n    \"name\": \"Dept1\",\n    \"description\": \"Department1 -X\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-departments/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-departments",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_by_pk",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ //pk in url\n    \"age\": 18\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-departments/1/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-departments",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query_all",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-departments/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-departments",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "employees",
+					"item": [
+						{
+							"name": "add",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Emp-{{global_counter}}\",\n    \"age\":18,\n    \"email\":\"emp.{{global_counter}}@focus-ui.com\",\n    \"department_id\":1,\n    \"description\": \"for Employee-{{global_counter}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/1/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1, //pk in body\n    \"age\": 19,\n    \"updated_at\": \"Tue, 11 Jul 2022 16:41:11 GMT\" //auto column, 不会被修改 \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_by_pk",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ //pk in url\n    \"age\": 20\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/1/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query_all",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query_ pss",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{flaskz_auth_token}}"
+									},
+									{
+										"key": "X-Requested-With",
+										"type": "text",
+										"value": "{{flaskz_requested_with}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search\": {\r\n        \"like\": \"emp\", // 模糊查询 - like_columns\r\n        \"updated_at\": {\r\n            \">\": \"2023-01-01 11:21:31\" //*单引号\r\n        },\r\n        // \"name1\": \"T1\", //条件查询\r\n        \"age\": { // 条件查询\r\n            \"between\": [\r\n                10,\r\n                20\r\n            ]\r\n        },\r\n        \"department\":{\r\n            \"like\":true\r\n        }\r\n    },\r\n    \"sort\": { // 排序\r\n        \"field\": \"name\",\r\n        \"order\": \"desc\" // asc/desc\r\n    },\r\n    \"page\": { // 分页\r\n        \"offset\": 0,\r\n        \"size\": 20\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/pss/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"pss",
+										""
+									]
+								},
+								"description": "search : search conditions\r\n    --like : like search    # (name like '%t%' OR description like '%t%')\r\n    --_ors : other or conditions    # email='t1@focus-ui.com' OR email='t2@focus-ui.com'\r\n    --_ands : other and conditions  #age>1 AND age<20\r\nsort : sort options    # ORDER BY templates.name ASC\r\n    -- field : sort field\r\n    -- order : sort order asc/desc\r\npage : page options     #  LIMIT ? OFFSET ? (20, 0)\r\n    -- offset : page offset \r\n    -- size : size per page\r\n\r\nSELECT templates.id AS templates_id, templates.name AS templates_name, templates.age AS templates_age, templates.email AS templates_email, templates.description AS templates_description, templates.created_at AS templates_created_at, templates.updated_at AS templates_updated_at\r\nFROM templates\r\nWHERE (name like '%t%' OR description like '%t%') AND (age>1 AND age<20) AND (email='t1@focus-ui.com' OR email='t2@focus-ui.com') ORDER BY templates.name ASC\r\n    LIMIT ? OFFSET ? (20, 0)\r\n\r\n{\r\n    \"search\": {\r\n        \"like\": \"t\",\r\n        \"_ors\": {\r\n            \"email\": \"t1@focus-ui.com||t2@focus-ui.com\"\r\n        },\r\n        \"_ands\": {\r\n            \"age\": {\r\n                \">\": 1,\r\n                \"<\": 20\r\n            }\r\n        }\r\n    },\r\n    \"sort\": {\r\n        \"field\": \"name\",\r\n        \"order\": \"asc\"\r\n    },\r\n    \"page\": {\r\n        \"offset\": 0,\r\n        \"size\": 20\r\n    }\r\n}"
+							},
+							"response": [
+								{
+									"name": "query_ pss",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "{{flaskz_auth_token}}"
+											},
+											{
+												"key": "X-Requested-With",
+												"type": "text",
+												"value": "{{flaskz_requested_with}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    //查询\r\n    \"search\": {\r\n        //模糊查询\r\n        \"like\": \"t\", // name like '%t%' OR description like '%t%',\r\n        \"like\": \"t%\", // name like 't%' OR description like 't%'\r\n        \"like\": \"%t\", // name like '%t' OR description like '%t'\r\n        \"like\": \"%' and id=1 and email like 't2\", // sql注入(结果为空)\r\n        //精确查询\r\n        \"name\": \"T1\", // name == T1\r\n        \"name\": {\r\n            \"==\": \"\" //name=‘’，默认会过滤掉空字符串“ ”\r\n        },\r\n        \"email\": \"t1@focus-ui.com\", // email == t1@focus-ui.com\r\n        \"email\": { // email like '%t%'\r\n            \"like\": \"t1\"\r\n        },\r\n        //比较&条件\r\n        \"updated_at\": { // updated_at >= 2022-01-01 00:00:00\" AND updated_at <  2023-01-01 00:00:00\r\n            \">=\": \"2022-01-01 00:00:00\",\r\n            \"<\": \"2023-01-01 00:00:00\"\r\n        },\r\n        \"age\": { // age BETWEEN 10 AND 20\r\n            \"between\": [\r\n                10,\r\n                20\r\n            ]\r\n        },\r\n        \"city\": { // city IN ('Paris','London')\r\n            \"in\": [\r\n                \"Paris\",\r\n                \"London\"\r\n            ]\r\n        },\r\n        \"address.city\": \"Paris\", // relation查询\r\n        \"address\": { // relation查询\r\n            \"like\": \"Paris\",\r\n            \"city\": \"Paris\"\r\n        },\r\n        // 关键字\r\n        // 1. 在不冲突的情况下，可以省略开头的‘_’ ex)ignore_null/ors/like，\r\n        // 2. 如果两者都存在，优先使用以'_'开头的属性 ex)_like > like\r\n        \"_ignore_null\": false, // 是否忽略空值(null/'')，默认为True(忽略)\r\n        \"_str_sep\": \"||\", // 字符串分隔符，默认为 \"||\"，ex) \"_ors\": {\"email\": \"t1@focus-ui.com||t2@flaskz.com\"}会被拆分成email==t1@focus-ui.com OR  email = t2@flaskz.com\r\n\r\n        \"_like\": \"t\", // 模糊查询关键字==like，like字段冲突时使用，优先级_like>_like\r\n        \"_ilike\": \"t\", // 不区分大小写模糊查询关键字==ilike(需DB支持)，ilike字段冲突时使用，优先级_ilike>ilike\r\n        \"_likejoin\": \"or\", //  模糊查询(包含)的连接方式，可选值为'or'/'and'，默认为or(任意一个字段包含即符合)\r\n        \r\n        \"notlike\": \"t\", // 不包含模糊查询, name notlike '%t%' AND description notlike '%t%'\r\n        \"_notlike\": \"t\", // 不包含模糊查询关键字==notlike，notlike字段冲突时使用，优先级_notlike>_notlike\r\n        \"_notilike\": \"t\", // 不区分大小写不包含模糊查询关键字==notilike(需DB支持)，notilike字段冲突时使用，优先级_notilike>notilike\r\n        \"_notilikejoin\": \"and\", // 模糊查询(不包含)的连接方式，可选值为'or'/'and'，默认为and(所有字段都不包含)\r\n\r\n        \"_like_columns\": [ \"name\" ], // 模糊查询的列，默认使用模型类的like_columns\r\n        \r\n        \"_ors\": { // 通过OR进行连接的多个查询条件集合\r\n            \"email\": \"t1@focus-ui.com||t2@flaskz.com\", //  email = t1@focus-ui.com OR email = t2@flaskz.com\r\n            \"name\": {\r\n                \"in\": [\r\n                    \"t1\",\r\n                    \"t2\"\r\n                ]\r\n            },\r\n            \"age\": {\r\n                \"between\": [\r\n                    10,\r\n                    20\r\n                ]\r\n            }\r\n        },\r\n        \"_ands\": { // 通过AND进行连接的多个查询条件集合\r\n            \"age\": { // age >10 AND age<20\r\n                \">\": 10,\r\n                \"<\": 20\r\n            }\r\n        }\r\n    },\r\n    //排序\r\n    \"sort\": \"name\", // ORDER BY name ASC\r\n    \"sort\": { // ORDER BY name DESC\r\n        \"field\": \"name\",\r\n        \"order\": \"desc\"\r\n    },\r\n    \"sort\": [ // ORDER BY name ASC, age DESC\r\n        {\r\n            \"field\": \"name\",\r\n            \"order\": \"asc\" // asc/desc\r\n        },\r\n        {\r\n            \"field\": \"age\",\r\n            \"order\": \"desc\" // asc/desc\r\n        }\r\n    ],\r\n    //分页\r\n    \"page\": { // LIMIT ? OFFSET ? (20, 0)\r\n        \"offset\": 0,\r\n        \"size\": 20\r\n    },\r\n    //分组\r\n    \"group\": \"email\" //GROUP BY email\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/pss/",
+											"protocol": "http",
+											"host": [
+												"{{flaskz_server_url}}"
+											],
+											"path": [
+												"api",
+												"v1.0",
+												"ex-employees",
+												"pss",
+												""
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "query_multi",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/multi/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"multi",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query_by_pk",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/1/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "employees-ext",
+					"item": [
+						{
+							"name": "bulk_add",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"name\": \"Emp-b{{global_counter}}-1\",\n        \"age\": 18,\n        \"email\": \"Emp-b{{global_counter}}-1@focus-ui.com\",\n        \"department_id\": 1,\n        \"description\": \"Employee,b{{global_counter}}-1\"\n    },\n    {\n        \"name\": \"Emp-b{{global_counter}}-2\",\n        \"age\": 18,\n        \"email\": \"Emp-b{{global_counter}}-2@focus-ui.com\",\n        \"department_id\": 1,\n        \"description\": \"Employee,b{{global_counter}}-2\"\n    },\n    {\n        \"name\": \"Emp-b{{global_counter}}-3\",\n        \"age\": 18,\n        \"email\": \"Emp-b{{global_counter}}-3@focus-ui.com\",\n        \"department_id\": 1,\n        \"description\": \"Employee,b{{global_counter}}-3\"\n    },\n    {\n        \"name\": \"Emp-b{{global_counter}}-4\",\n        \"age\": 18,\n        \"email\": \"Emp-b{{global_counter}}-4@focus-ui.com\",\n        \"department_id\": 2,\n        \"description\": \"Employee,b{{global_counter}}-4\"\n    },\n    {\n        \"name\": \"Emp-b{{global_counter}}-5\",\n        \"age\": 18,\n        \"email\": \"Emp-b{{global_counter}}-5@focus-ui.com\",\n        \"department_id\": 2,\n        \"description\": \"Employee,b{{global_counter}}-5\"\n    },\n    {\n        \"name\": \"Emp-b{{global_counter}}-6\",\n        \"age\": 18,\n        \"email\": \"Emp-b{{global_counter}}-6@focus-ui.com\",\n        \"department_id\": 3,\n        \"description\": \"Employee,b{{global_counter}}-6\"\n    },\n    {\n        \"name\": \"Emp-b{{global_counter}}-7\",\n        \"age\": 18,\n        \"email\": \"Emp-b{{global_counter}}-7@focus-ui.com\",\n        \"department_id\": 3,\n        \"description\": \"Employee,b{{global_counter}}-7\"\n    },\n    {\n        \"name\": \"Emp-b{{global_counter}}-8\",\n        \"age\": 18,\n        \"email\": \"Emp-b{{global_counter}}-8@focus-ui.com\",\n        \"department_id\": 4,\n        \"description\": \"Employee,b{{global_counter}}-8\"\n    },\n    {\n        \"name\": \"Emp-b{{global_counter}}-9\",\n        \"age\": 18,\n        \"email\": \"Emp-b{{global_counter}}-9@focus-ui.com\",\n        \"department_id\": 4,\n        \"description\": \"Employee,b{{global_counter}}-9\"\n    },\n    {\n        \"name\": \"Emp-b{{global_counter}}-10\",\n        \"age\": 18,\n        \"email\": \"Emp-b{{global_counter}}-10@focus-ui.com\",\n        \"department_id\": 5,\n        \"description\": \"Employee,b{{global_counter}}-10\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/bulk/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"bulk",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "bulk_update",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"id\": 18,\n        \"age\": 20\n    },\n    {\n        \"id\": 19,\n        \"age\": 21\n    },\n    {\n        \"id\": 20,\n        \"age\": 22\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/bulk/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"bulk",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "bulk_delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    11,\n    12,\n    13,\n    14,\n    15\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/bulk/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"bulk",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "bulk_delete _by_ids",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/bulk/16,17,18,19,20",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"bulk",
+										"16,17,18,19,20"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "clear",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/clear",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"clear"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query_count_all",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/count/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"count",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query_count_ search",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{flaskz_auth_token}}"
+									},
+									{
+										"key": "X-Requested-With",
+										"type": "text",
+										"value": "{{flaskz_requested_with}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"search\": {\r\n        \"age\": { // 条件\r\n            \"between\": [\r\n                10,\r\n                20\r\n            ]\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/count/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"count",
+										""
+									]
+								},
+								"description": "search : search conditions\r\n    --like : like search    # (name like '%t%' OR description like '%t%')\r\n    --_ors : other or conditions    # email='t1@focus-ui.com' OR email='t2@focus-ui.com'\r\n    --_ands : other and conditions  #age>1 AND age<20\r\nsort : sort options    # ORDER BY templates.name ASC\r\n    -- field : sort field\r\n    -- order : sort order asc/desc\r\npage : page options     #  LIMIT ? OFFSET ? (20, 0)\r\n    -- offset : page offset \r\n    -- size : size per page\r\n\r\nSELECT templates.id AS templates_id, templates.name AS templates_name, templates.age AS templates_age, templates.email AS templates_email, templates.description AS templates_description, templates.created_at AS templates_created_at, templates.updated_at AS templates_updated_at\r\nFROM templates\r\nWHERE (name like '%t%' OR description like '%t%') AND (age>1 AND age<20) AND (email='t1@focus-ui.com' OR email='t2@focus-ui.com') ORDER BY templates.name ASC\r\n    LIMIT ? OFFSET ? (20, 0)\r\n\r\n{\r\n    \"search\": {\r\n        \"like\": \"t\",\r\n        \"_ors\": {\r\n            \"email\": \"t1@focus-ui.com||t2@focus-ui.com\"\r\n        },\r\n        \"_ands\": {\r\n            \"age\": {\r\n                \">\": 1,\r\n                \"<\": 20\r\n            }\r\n        }\r\n    },\r\n    \"sort\": {\r\n        \"field\": \"name\",\r\n        \"order\": \"asc\"\r\n    },\r\n    \"page\": {\r\n        \"offset\": 0,\r\n        \"size\": 20\r\n    }\r\n}"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "permission",
+					"item": [
+						{
+							"name": "public",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/public",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"public"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login-required",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/login-required",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"login-required"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "module-required",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/module-required",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"module-required"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "module+action-required",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/ex-employees/module-action-required",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"ex-employees",
+										"module-action-required"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "test",
+					"item": [
+						{
+							"name": "for-test",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{flaskz_auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "{{flaskz_requested_with}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{flaskz_server_url}}/api/v1.0/for-test/",
+									"protocol": "http",
+									"host": [
+										"{{flaskz_server_url}}"
+									],
+									"path": [
+										"api",
+										"v1.0",
+										"for-test",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"/**",
+					" * https://github.com/fkei/JSON.minify/blob/master/minify.json.js",
+					" */",
+					"(function (global) {",
+					"    /**",
+					"     * @function",
+					"     * @memberof JSON",
+					"     * @param {Object} Transformed data. format) json-like",
+					"     * @return {String}",
+					"     *",
+					"     * @example",
+					"     * var json = { // hoge",
+					"     *     \"foo\": \"bar\",// this is cool",
+					"     *     \"bar\": [",
+					"     *         \"baz\", \"bum\", \"zam\"   // this is cool",
+					"     *     ]",
+					"     * } // hoge",
+					"     *",
+					"     */",
+					"    var minify = function (json) {",
+					"        var tokenizer = /\"|(\\/\\*)|(\\*\\/)|(\\/\\/)|\\n|\\r|\\[|]/g,",
+					"            in_string = false,",
+					"            in_multiline_comment = false,",
+					"            in_singleline_comment = false,",
+					"            tmp, tmp2, new_str = [], ns = 0, from = 0, lc, rc,",
+					"            prevFrom;",
+					"        tokenizer.lastIndex = 0;",
+					"        while (tmp = tokenizer.exec(json)) {",
+					"            lc = RegExp.leftContext;",
+					"            rc = RegExp.rightContext;",
+					"            if (!in_multiline_comment && !in_singleline_comment) {",
+					"                tmp2 = lc.substring(from);",
+					"                if (!in_string) {",
+					"                    tmp2 = tmp2.replace(/(\\n|\\r|\\s)*/g, \"\");",
+					"                }",
+					"                new_str[ns++] = tmp2;",
+					"            }",
+					"            prevFrom = from;",
+					"            from = tokenizer.lastIndex;",
+					"",
+					"            // found a \" character, and we're not currently in",
+					"            // a comment? check for previous `\\` escaping immediately",
+					"            // leftward adjacent to this match",
+					"            if (tmp[0] === \"\\\"\" && !in_multiline_comment && !in_singleline_comment) {",
+					"                // limit left-context matching to only go back",
+					"                // to the position of the last token match",
+					"                //",
+					"                // see: https://github.com/getify/JSON.minify/issues/64",
+					"                lc.lastIndex = prevFrom;",
+					"",
+					"                // perform leftward adjacent escaping match",
+					"                tmp2 = lc.match(/(\\\\)*$/);",
+					"                // start of string with \", or unescaped \" character found to end string?",
+					"                if (!in_string || !tmp2 || (tmp2[0].length % 2) === 0) {",
+					"                    in_string = !in_string;",
+					"                }",
+					"                from--; // include \" character in next catch",
+					"                rc = json.substring(from);",
+					"            } else if (tmp[0] === \"/*\" && !in_string && !in_multiline_comment && !in_singleline_comment) {",
+					"                in_multiline_comment = true;",
+					"            } else if (tmp[0] === \"*/\" && !in_string && in_multiline_comment && !in_singleline_comment) {",
+					"                in_multiline_comment = false;",
+					"            } else if (tmp[0] === \"//\" && !in_string && !in_multiline_comment && !in_singleline_comment) {",
+					"                in_singleline_comment = true;",
+					"            } else if ((tmp[0] === \"\\n\" || tmp[0] === \"\\r\") && !in_string && !in_multiline_comment && in_singleline_comment) {",
+					"                in_singleline_comment = false;",
+					"            } else if (!in_multiline_comment && !in_singleline_comment && !(/\\n|\\r|\\s/.test(tmp[0]))) {",
+					"                new_str[ns++] = tmp[0];",
+					"            }",
+					"        }",
+					"        new_str[ns++] = rc;",
+					"        return new_str.join(\"\");",
+					"    };",
+					"    if (typeof module !== 'undefined' && module.exports) {",
+					"        // node",
+					"        module.exports = minify;",
+					"        JSON.minify = minify;",
+					"    } else {",
+					"        // others, export global",
+					"        if (typeof global.JSON === \"undefined\" || !global.JSON) {",
+					"            global.JSON = {};",
+					"        }",
+					"        global.JSON.minify = minify;",
+					"    }",
+					"})(this);",
+					"//对发送数据进行处理",
+					"pm.request.body.raw = JSON.minify(pm.request.body.raw)",
+					"pm.collectionVariables.set(\"global_counter\", (pm.collectionVariables.get(\"global_counter\")|0 )+ 1);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "flaskz_auth_token",
+			"value": "flaskz_auth_token"
+		},
+		{
+			"key": "flaskz_requested_with",
+			"value": "XMLHttpRequest"
+		},
+		{
+			"key": "flaskz_server_url",
+			"value": "127.0.0.1:666"
+		},
+		{
+			"key": "global_counter",
+			"value": ""
+		},
+		{
+			"key": "flaskz_auth_refresh_token",
+			"value": ""
+		},
+		{
+			"key": "version",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

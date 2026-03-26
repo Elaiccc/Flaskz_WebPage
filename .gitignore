@@ -1,0 +1,13 @@
+.DS_Store
+app/.DS_Store
+
+.idea/
+.venv/
+
+__pycache__/
+*/__pycache__/
+*.py[cod]
+
+_sqlite/*.db
+_syslog/*.txt
+_syslog/*.txt.*

@@ -1,0 +1,107 @@
+var refreshMenuByPath = function (paths) {
+    var admin = window.top.Admin;
+    if (admin) {
+        admin.refreshMenu(paths)
+    }
+};
+if (z.bom.browser === "Safari") {
+    z.ready(function () {
+        var fk_safari_style = z.dom.create("<style type='text/css'>.fk-safari {cursor: auto}</style>")
+        document.head.appendChild(fk_safari_style);
+        z.util.callLater(function () {
+            document.head.removeChild(fk_safari_style);
+        }, 10)
+    })
+}
+
+z.setDefault({
+    "AJAX_BEFORE_SEND": function (httpRequest) {
+        httpRequest.setRequestHeader("Authorization", z.bom.getLocalStorage("auth-token"));
+    },
+    "AJAX_COMPLETE": function (httpRequest) {
+        var status = httpRequest.status;
+        if (status === 200) {
+            var responseType = httpRequest.responseType;
+            if (responseType === "" || responseType === "text") {
+                try {
+                    var result = JSON.parse(httpRequest.responseText);
+                    if (result.status !== z.getDefault("PRO_AJAX_SUCCESS_STATE") && result.status_code === 'uri_unauthorized') {
+                        var hash = z.bom.getLocationHash()
+                        if (hash) {
+                            z.bom.setSessionStorage('selected_menu', hash);
+                        }
+                        var pathname = window.location.pathname;
+                        if (pathname === "/" || pathname === "/index" || pathname === "index") {
+                            window.top.location.href = "/login";
+                        } else {
+                            z.widget.alert(z.i18n.t("LOGIN_REQUIRED"), z.i18n.t("PRO_MESSAGE_TIPS"), function (result) {//callback
+                                z.widget.notify(false);
+                                if (window.top.Admin && window.top.Admin.showLoginModal) {
+                                    window.top.Admin.showLoginModal();
+                                } else {
+                                    window.top.location.href = "/login";
+                                }
+                            });
+                        }
+                    }
+                } catch (err) {
+                }
+            }
+        }
+    }
+});
+
+/*
+if (pro) {
+    var _createGrid = pro.template.CRUDTablePage._createGrid;
+    pro.template.CRUDTablePage._createGrid = function () {
+        var grid = _createGrid.apply(pro.template.CRUDTablePage, arguments);
+        var pagination = this.gridPagination;
+        if (pagination) {
+            pagination.set("total_template", "<%start%>-<%end%> | <%total%>  跳转至<input id='jumpInput' class='sizes' style='width:2.6em'>页");
+            var _updateTotalInfo = pagination._updateTotalInfo
+            pagination._updateTotalInfo = function () {
+                _updateTotalInfo.apply(pagination, arguments);
+                var jumpInput = z.dom.query("#jumpInput", pagination.getRoot());
+                if (jumpInput && jumpInput._inited !== true) {
+                    jumpInput._inited = true;
+                    z.dom.event.onchange(jumpInput, function () {
+                        var pageConfig = pagination.getPageConfig();
+                        var index = Math.min(Math.max(1, jumpInput.value | 0), pageConfig.number);
+                        pagination.set("page_index", index);
+                        jumpInput.value = "";
+                    });
+                }
+            }
+        }
+        return grid;
+    }
+}
+*/
+
+
+/*
+z.ajax.setup({
+    beforeSend: function (httpRequest) {
+        httpRequest.setRequestHeader("Authorization", z.bom.getLocalStorage("auth-token"));
+    },
+    complete: function (httpRequest) {
+        var status = httpRequest.status;
+        if (status === 200) {
+            var responseType = httpRequest.responseType;
+            if (responseType === "" || responseType === "text") {
+                var result = JSON.parse(httpRequest.responseText);
+                if (result.status !== z.getDefault("PRO_AJAX_SUCCESS_STATE") && result.status_code === 'uri_unauthorized') {
+                    var pathname = window.location.pathname;
+                    if (pathname === "/" || pathname === "/index" || pathname === "index") {
+                        window.top.location.href = "/login";
+                    } else {
+                        z.widget.alert("请先登录!!", "提示", function (result) {//callback
+                            window.top.location.href = "/login";
+                        });
+                    }
+                }
+            }
+        }
+    }
+});*/
